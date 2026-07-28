@@ -1,4 +1,4 @@
-# Fake String Library
+# mini libc project
 
 A small string library written from scratch in C.
 
