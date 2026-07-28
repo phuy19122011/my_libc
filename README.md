@@ -17,7 +17,7 @@ The goal is to improve my understanding of:
 ## Example
 
 ```c
-#include "fake_string.h"
+#include "fakestring.h"
 
 int main()
 {
