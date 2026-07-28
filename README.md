@@ -1,6 +1,6 @@
 # mini libc project
 
-A small string library written from scratch in C.
+A small  library written from scratch in C.
 
 This project is created for learning purposes to understand how basic C string functions work internally without relying on the standard library.
 
