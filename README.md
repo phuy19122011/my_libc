@@ -12,18 +12,7 @@ The goal is to improve my understanding of:
 * Low-level programming concepts
 * Library design
 
-## Current Features
 
-Implemented functions:
-
-| Function      | Description                              |
-| ------------- | ---------------------------------------- |
-| `my_strlen()` | Calculate the length of a string         |
-| `my_strrev()` | Reverse a string                         |
-| `my_strcpy()` | Copy a string                            |
-| `my_strchr()` | Find the first occurrence of a character |
-| `my_strcat()` | Concatenate two strings                  |
-| `my_strcmp()` | Compare two strings                      |
 
 ## Example
 
