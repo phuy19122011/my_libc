@@ -1,4 +1,4 @@
-#include "fakestring.h"
+#include "my_string.h"
 #include <stddef.h>
 
 int my_strlen(const char *str){
@@ -55,4 +55,28 @@ int my_strcmp(const char *str1, const char *str2){
         str2++;
     }
     return *(const unsigned char*)str1 - *(const unsigned char*)str2;
+}
+char* my_strncpy(char* dest, const char* src, size_t n){
+    size_t i;
+    for(i = 0; i < n && src[i] != '\0' ; i++){
+        dest[i] = src[i];
+    }
+    for(;i < n; i++){
+        dest[i] = '\0';
+    }
+    return dest;
+}
+char* my_strncat(char* dest, const char* src, size_t n){
+    char* ptr = dest;
+    while(*ptr != '\0'){
+        ptr++;
+    }
+    size_t i = 0;
+    while(i < n && src[i] != '\0'){
+        *ptr = src[i];
+        ptr++;
+        i++;
+    }
+    *ptr = '\0';
+    return dest;
 }
