@@ -54,6 +54,3 @@ This project is part of my journey learning C and low-level programming.
 
 Instead of only using existing libraries, I want to understand how they work internally by rebuilding simple versions from scratch.
 
-## License
-
-no License yet.

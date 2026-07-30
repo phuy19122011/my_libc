@@ -80,3 +80,14 @@ char* my_strncat(char* dest, const char* src, size_t n){
     *ptr = '\0';
     return dest;
 }
+int my_strncmp(const char* str1,const char* str2,size_t n){
+    while(n > 0 && *str1 != '\0' && (*str1 == *str2)){
+        str1++;
+        str2++;
+        n--;
+    }
+    if(n == 0){
+        return 0;
+    }
+    return *(const unsigned char*)str1 - *(const unsigned char*)str2;
+}
