@@ -12,4 +12,5 @@ int my_strcmp(const char *str1, const char *str2);
 char* my_strncpy(char* dest, const char* src, size_t n);
 char* my_strncat(char* dest, const char* src, size_t n);
 int my_strncmp(const char* str1,const char* str2,size_t n);
+char* my_strrchr(const char* src, char c);
 #endif

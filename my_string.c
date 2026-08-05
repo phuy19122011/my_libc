@@ -91,3 +91,16 @@ int my_strncmp(const char* str1,const char* str2,size_t n){
     }
     return *(const unsigned char*)str1 - *(const unsigned char*)str2;
 }
+char* my_strrchr(const char* src, char c){
+    const char* last = nullptr;
+    while(1){
+        if(*src == c){
+            last = src;
+        }
+        if(*src == '\0'){
+            break;
+        }
+        src++;
+    }
+    return (char*)last;
+}
