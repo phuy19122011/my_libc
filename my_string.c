@@ -104,3 +104,21 @@ char* my_strrchr(const char* src, char c){
     }
     return (char*)last;
 }
+char* my_strstr(const char* str1 , const char* str2){
+    if(*str1 == '\0'){
+        return (char*)str1;
+    }
+    while(*str1 != '\0'){
+        const char* h = str1;
+        const char* n = str2;
+        while(*h == *n && *n != '\0'){
+            h++;
+            n++;
+        }
+        if(*n == '\0'){
+            return(char*)str1;
+        }
+        str1++;
+    }
+    return nullptr;
+}
