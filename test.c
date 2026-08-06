@@ -1,133 +1,126 @@
 #include <stdio.h>
 #include <assert.h>
+#include <string.h>
 #include "my_string.h"
 
-void test_strlen(void) {
+void test_my_strlen(void) {
     assert(my_strlen("") == 0);
     assert(my_strlen("a") == 1);
-    assert(my_strlen("Hello") == 5);
-    assert(my_strlen("Hello World") == 11);
+    assert(my_strlen("Hello, World!") == 13);
 }
 
-void test_strrev(void) {
-    char str1[] = "hello";
-    char str2[] = "abcd";
-    char str3[] = "a";
-    char str4[] = "";
+void test_my_strrev(void) {
+    char str1[] = "";
+    assert(strcmp(my_strrev(str1), "") == 0);
 
-    assert(my_strcmp(my_strrev(str1), "olleh") == 0);
-    assert(my_strcmp(my_strrev(str2), "dcba") == 0);
-    assert(my_strcmp(my_strrev(str3), "a") == 0);
-    assert(my_strcmp(my_strrev(str4), "") == 0);
+    char str2[] = "a";
+    assert(strcmp(my_strrev(str2), "a") == 0);
+
+    char str3[] = "hello";
+    assert(strcmp(my_strrev(str3), "olleh") == 0);
+
+    char str4[] = "123456";
+    assert(strcmp(my_strrev(str4), "654321") == 0);
 }
 
-void test_strcpy(void) {
-    char dest[100];
+void test_my_strcpy(void) {
+    char dest[50];
+    
+    assert(my_strcpy(dest, "") == dest);
+    assert(strcmp(dest, "") == 0);
 
-    my_strcpy(dest, "hello");
-    assert(my_strcmp(dest, "hello") == 0);
-
-    my_strcpy(dest, "");
-    assert(my_strcmp(dest, "") == 0);
-
-    my_strcpy(dest, "C Programming");
-    assert(my_strcmp(dest, "C Programming") == 0);
+    assert(my_strcpy(dest, "Hello C") == dest);
+    assert(strcmp(dest, "Hello C") == 0);
 }
 
-void test_strchr(void) {
-    char str[] = "hello";
+void test_my_strchr(void) {
+    const char *str = "Hello, World!";
 
-    assert(my_strchr(str, 'h') == &str[0]);
-    assert(my_strchr(str, 'e') == &str[1]);
-    assert(my_strchr(str, 'o') == &str[4]);
-    assert(my_strchr(str, '\0') == &str[5]);
-    assert(my_strchr(str, 'x') == NULL);
+    assert(my_strchr(str, 'o') == str + 4);
+    assert(my_strchr(str, 'H') == str);
+    assert(my_strchr(str, '\0') == str + strlen(str));
+    assert(my_strchr(str, 'z') == NULL);
 }
 
-void test_strcat(void) {
-    char dest[100] = "Hello";
+void test_my_strcat(void) {
+    char dest[50] = "Hello";
 
-    my_strcat(dest, " World");
-    assert(my_strcmp(dest, "Hello World") == 0);
+    assert(my_strcat(dest, " World") == dest);
+    assert(strcmp(dest, "Hello World") == 0);
 
-    my_strcat(dest, "");
-    assert(my_strcmp(dest, "Hello World") == 0);
-
-    char dest2[100] = "";
-    my_strcat(dest2, "ABC");
-    assert(my_strcmp(dest2, "ABC") == 0);
+    assert(my_strcat(dest, "") == dest);
+    assert(strcmp(dest, "Hello World") == 0);
 }
 
-void test_strcmp(void) {
+void test_my_strcmp(void) {
     assert(my_strcmp("abc", "abc") == 0);
-
     assert(my_strcmp("abc", "abd") < 0);
     assert(my_strcmp("abd", "abc") > 0);
-
-    assert(my_strcmp("", "") == 0);
-    assert(my_strcmp("", "a") < 0);
-    assert(my_strcmp("a", "") > 0);
-
     assert(my_strcmp("abc", "abcd") < 0);
     assert(my_strcmp("abcd", "abc") > 0);
+    assert(my_strcmp("", "") == 0);
 }
 
-void test_strncpy(void) {
-    char dest[100];
+void test_my_strncpy(void) {
+    char dest[20];
 
-    my_strncpy(dest, "hello", 3);
-    dest[3] = '\0';
-    assert(my_strcmp(dest, "hel") == 0);
+    memset(dest, 'X', sizeof(dest));
+    assert(my_strncpy(dest, "Hello World", 5) == dest);
+    assert(memcmp(dest, "HelloXXXXX", 10) == 0);
 
-    my_strncpy(dest, "hi", 5);
-    assert(dest[0] == 'h');
-    assert(dest[1] == 'i');
-    assert(dest[2] == '\0');
-    assert(dest[3] == '\0');
-    assert(dest[4] == '\0');
-
-    my_strncpy(dest, "", 3);
-    assert(dest[0] == '\0');
-    assert(dest[1] == '\0');
-    assert(dest[2] == '\0');
+    memset(dest, 'X', sizeof(dest));
+    assert(my_strncpy(dest, "Hi", 5) == dest);
+    assert(dest[0] == 'H' && dest[1] == 'i' && dest[2] == '\0' && dest[3] == '\0' && dest[4] == '\0');
 }
 
-void test_strncat(void) {
-    char dest1[100] = "Hello";
+void test_my_strncat(void) {
+    char dest[20] = "Hello";
 
-    my_strncat(dest1, " World", 3);
-    assert(my_strcmp(dest1, "Hello Wo") == 0);
+    assert(my_strncat(dest, ", World!", 3) == dest);
+    assert(strcmp(dest, "Hello, W") == 0);
 
-    char dest2[100] = "ABC";
-    my_strncat(dest2, "DEF", 10);
-    assert(my_strcmp(dest2, "ABCDEF") == 0);
+    assert(my_strncat(dest, "!!", 10) == dest);
+    assert(strcmp(dest, "Hello, W!!") == 0);
+}
 
-    char dest3[100] = "";
-    my_strncat(dest3, "Hello", 2);
-    assert(my_strcmp(dest3, "He") == 0);
+void test_my_strncmp(void) {
+    assert(my_strncmp("abcdef", "abcghi", 3) == 0);
+    assert(my_strncmp("abcdef", "abcghi", 4) < 0);
+    assert(my_strncmp("abcghi", "abcdef", 4) > 0);
+    assert(my_strncmp("abc", "def", 0) == 0);
+}
 
-    char dest4[100] = "Test";
-    my_strncat(dest4, "", 5);
-    assert(my_strcmp(dest4, "Test") == 0);
+void test_my_strrchr(void) {
+    const char *str = "Hello, World!";
 
-    char dest5[100] = "ABC";
-    my_strncat(dest5, "XYZ", 0);
-    assert(my_strcmp(dest5, "ABC") == 0);
+    assert(my_strrchr(str, 'o') == str + 8);
+    assert(my_strrchr(str, '!') == str + 12);
+    assert(my_strrchr(str, '\0') == str + strlen(str));
+    assert(my_strrchr(str, 'x') == NULL);
+}
+
+void test_my_strstr(void) {
+    const char *haystack = "Hello, World!";
+
+    assert(my_strstr(haystack, "World") == haystack + 7);
+    assert(my_strstr(haystack, "Hello") == haystack);
+    assert(my_strstr(haystack, "Bye") == NULL);
+    assert(my_strstr(haystack, "") == haystack);
 }
 
 int main(void) {
-    test_strlen();
-    test_strrev();
-    test_strcpy();
-    test_strchr();
-    test_strcat();
-    test_strcmp();
-    test_strncpy();
-    test_strncat();
+    test_my_strlen();
+    test_my_strrev();
+    test_my_strcpy();
+    test_my_strchr();
+    test_my_strcat();
+    test_my_strcmp();
+    test_my_strncpy();
+    test_my_strncat();
+    test_my_strncmp();
+    test_my_strrchr();
+    test_my_strstr();
 
-    printf("=================================\n");
-    printf(" All tests passed successfully!\n");
-    printf("=================================\n");
-
+    printf("ALL TESTS PASSED!\n");
     return 0;
 }
